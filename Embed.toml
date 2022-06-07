@@ -1,0 +1,20 @@
+[default.probe]
+protocol = "Swd"
+
+[default.flashing]
+enabled = true
+restore_unwritten_bytes = false
+
+[default.reset]
+enabled = true
+halt_afterwards = false
+
+[default.rtt]
+enabled = true
+
+[default.general]
+{% if board == "IskraJS" %}chip = "STM32F405RGTx"{% else %}chip = "STM32F411CEUx"{% endif %}
+log_level = "WARN"
+
+[default.gdb]
+enabled = true

@@ -1,0 +1,13 @@
+[template]
+cargo_generate_version = ">=0.10.0"
+ignore = [
+    ".git",
+    "readme.md",
+    "readme_ru.md",
+]
+description1 = "Rust blink template for Iskra JS or Iskra JS Mini boards"
+
+[placeholders]
+board = { type = "string", prompt = "Select board", choices = ["IskraJS", "IskraJS Mini"], default = "IskraJS" }
+rtic = { type = "string", prompt = "Use RTIC framework?", choices = ["Yes", "No"], default = "No" }
+rtt = { type = "string", prompt = "Use RTT (require debug)?", choices = ["Yes", "No"], default = "No" }

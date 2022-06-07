@@ -1,0 +1,37 @@
+[package]
+name = "{{project-name}}"
+version = "0.1.0"
+authors = ["{{authors}}"]
+edition = "2021"
+resolver = "2"
+
+[dependencies]
+cortex-m = "^0.7"
+{% if rtic == "Yes" %}cortex-m-rtic = "^1"
+systick-monotonic = "^1"{% else %}cortex-m-rt = "^0.7"{% endif %}
+{% if rtt == "Yes" %}panic-rtt-target = { version = "0.1", features = ["cortex-m"] }
+rtt-target = { version = "^0.3", features = ["cortex-m"] }{% else %}panic-halt = "0.2"{% endif %}
+{% if board == "IskraJS" %}stm32f4xx-hal = {version = "0.13.1", default-features = false, features = ["rt", "stm32f405"]}
+r0 = "^1"{% else %}stm32f4xx-hal = {version = "0.13.1", default-features = false, features = ["rt", "stm32f411"]}{% endif %}
+
+[profile.release]
+codegen-units = 1
+debug = true
+debug-assertions = true
+# lto = true
+opt-level = "s"
+
+# do not optimize proc-macro crates = faster builds from scratch
+[profile.dev.build-override]
+codegen-units = 8
+debug = false
+debug-assertions = false
+opt-level = 0
+overflow-checks = false
+
+[profile.release.build-override]
+codegen-units = 8
+debug = false
+debug-assertions = false
+opt-level = 0
+overflow-checks = false
